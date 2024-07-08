@@ -9,7 +9,7 @@ function App() {
 
     return (
         <div className="App">
-              <body>
+            <body>
                 <table>
                 <caption>
                     Top Five Countries by Coffee Consumption - Annually
@@ -48,7 +48,7 @@ function App() {
                     </tr>
                 </tbody>
                 </table>
-  </body>
+            </body>
         </div>
 
     )
