@@ -1,16 +1,26 @@
 import './App.css';
 
 function App() {
+
+  const shoppinglist = {
+    important1: "coffee grounds",
+    important2: "milk",
+    important3: "creamer",
+    important4: "sugar",
+    important5: "super cool mugs",
+
+  }
+
   return (
-   <div className="App">
-      <header>
-        <h1 className="title">
+    <div className="App">
+      <span>
+        <header className="title">
           Welcome
-        </h1>
-      </header>
-      <div className="table">
-        <div>
-          <table>
+        </header>
+      </span>
+
+      <span>
+        <table className="table">
             <caption>
               Top Five Countries by Coffee Consumption - Annually
             </caption>
@@ -30,50 +40,71 @@ function App() {
               <tr>
                 <th scope="row">Norway</th>
                 <td>9.9</td>
-              </tr>
+            </tr>
 
-              <tr>
-                <th scope="row">Iceland</th>
-                <td>9</td>
-              </tr>
+            <tr>
+              <th scope="row">Iceland</th>
+              <td>9</td>
+            </tr>
 
-              <tr>
-                <th scope="row">Denmark</th>
-                <td>8.7</td>
-              </tr>
+            <tr>
+              <th scope="row">Denmark</th>
+              <td>8.7</td>
+            </tr>
 
-              <tr>
-                <th scope="row">Sweden</th>
-                <td>8.2</td>
-              </tr>
+            <tr>
+              <th scope="row">Sweden</th>
+              <td>8.2</td>
+            </tr>
 
-            </tbody>
-          </table>
-        </div>
-        <br></br>
-        <div>
-          <img className="img" src="coolpic.png"></img>
-        </div>
+          </tbody>
+        </table>
+      </span>
+
+      <div className="moreinfo">
+        <h2>Want to learn more about coffee (of course you do) </h2>
+        <h3>Click the article you wish to read</h3>
+        <ul>
+          <li>
+            <a href="https://www.medicalnewstoday.com/articles/270202">
+              <button className="button">Coffee's health benefits</button>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.bbc.com/future/bespoke/made-on-earth/how-the-world-came-to-run-on-coffee/">
+              <button className="button">Coffee rise to popularity</button>
+            </a>
+          </li>
+        </ul>
+        
       </div>
-      <br></br>
-      <div className="button1">
-        <a href="https://cssgridgarden.com/">
-          <button>CLICK HERE</button>
-        </a>
-        </div>
-        <div className="button2">
-          <a href="https://cssgridgarden.com/">
-            <button>OR HERE</button>
-          </a>
-        </div>
-        <span className="groceries">
-          <ol> 
-            <li>chicken nuggets</li>
-            <li>milk</li>
-            <li>apples</li>
-          </ol>
-        </span>
+      <div>
+        <select className="dropdown">
+          <option>
+            Select One
+          </option>
+          <option>
+            {shoppinglist.important1}
+          </option>
+          <option>
+            {shoppinglist.important2}
+          </option>
+          <option>
+            {shoppinglist.important3}
+          </option>
+          <option>
+            {shoppinglist.important4}
+          </option>
+          <option>
+            {shoppinglist.important5}
+          </option>
+        </select>
       </div>
+      <div>
+        <img className ="coolpic" src="coolpic2.png"></img>
+      </div>
+
+    </div>
       
 
   )
