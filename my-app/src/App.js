@@ -10,7 +10,8 @@ function App() {
     important5: "super cool mugs",
 
   }
-
+  
+  
   return (
     <div className="App">
       <span>
@@ -67,17 +68,22 @@ function App() {
         <ul>
           <li>
             <a href="https://www.medicalnewstoday.com/articles/270202">
-              <button className="button">Coffee's health benefits</button>
+              <button className="button1"> Coffee's health benefits</button>
             </a>
           </li>
           <li>
             <a href="https://www.bbc.com/future/bespoke/made-on-earth/how-the-world-came-to-run-on-coffee/">
-              <button className="button">Coffee rise to popularity</button>
+              <button className="button2">Coffee rise to popularity</button>
             </a>
           </li>
         </ul>
         
       </div>
+
+      <div>
+        <img className="coolpic" src="coolpic2"></img>
+      </div>
+
       <div>
         <select className="dropdown">
           <option>
@@ -100,12 +106,8 @@ function App() {
           </option>
         </select>
       </div>
-      <div>
-        <img className ="coolpic" src="coolpic2.png"></img>
-      </div>
 
     </div>
-      
 
   )
 }
