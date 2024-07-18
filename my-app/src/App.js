@@ -11,6 +11,22 @@ function App() {
 
   }
   
+  function listenForInput () {
+    const suggestionInput = document.getElementById = ("textInput");
+  }
+
+  function btn () {
+    const btn = document.getElementById=("formBtn");
+    btn.addEventListener ("click", suggestions)
+  }
+
+  function suggestions () {
+    const suggestionInput = document.getElementById = ("textInput");
+    console.log (suggestionInput.value)
+  }
+  
+  
+
   
   return (
     <div className="App">
@@ -25,7 +41,6 @@ function App() {
             <caption>
               Top Five Countries by Coffee Consumption - Annually
             </caption>
-            <br></br>
             <thead>
               <tr>
                 <th scope="col">Country</th>
@@ -62,18 +77,26 @@ function App() {
         </table>
       </span>
 
+      <div>
+          <h2>Any suggestions for the website? Submit them here!</h2>
+          <input id="textInput" placeholder="Enter text here">
+          </input>
+          <button id="formBtn"> Submit </button>
+      </div>
+
+
       <div className="moreinfo">
         <h2>Want to learn more about coffee (of course you do) </h2>
         <h3>Click the article you wish to read</h3>
         <ul>
           <li>
-            <a href="https://www.medicalnewstoday.com/articles/270202">
+            <a target="_blank" href="https://www.medicalnewstoday.com/articles/270202">
               <button className="button1"> Coffee's health benefits</button>
             </a>
           </li>
           <li>
-            <a href="https://www.bbc.com/future/bespoke/made-on-earth/how-the-world-came-to-run-on-coffee/">
-              <button className="button2">Coffee rise to popularity</button>
+            <a target="_blank" href="https://www.bbc.com/future/bespoke/made-on-earth/how-the-world-came-to-run-on-coffee/">
+              <button className="button2">Coffee's rise to popularity</button>
             </a>
           </li>
         </ul>
@@ -85,14 +108,14 @@ function App() {
       </div>
 
       <div>
-        <select className="dropdown">
+        <select>
           <option>
             Select One
           </option>
-          <option>
+            <option value="https://www.target.com/c/ground-coffee-beverages-grocery/-/N-x2hqv">
             {shoppinglist.important1}
-          </option>
-          <option>
+            </option>
+          <option value="https://www.target.com/c/milk-dairy-grocery/-/N-5xszh">
             {shoppinglist.important2}
           </option>
           <option>
