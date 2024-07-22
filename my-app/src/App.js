@@ -10,23 +10,16 @@ function App() {
     important5: "super cool mugs",
 
   }
-  
+
   function listenForInput () {
-    const suggestionInput = document.getElementById = ("textInput");
+    const emailInput = document.getElementById=("email-input");
+    emailInput.addEventListener ('change',isEmailValid);
   }
 
-  function btn () {
-    const btn = document.getElementById=("formBtn");
-    btn.addEventListener ("click", suggestions)
+  function isEmailValid () {
+    const emailInput = document.getElementById=("email-input");
+    console.log (emailInput.value);
   }
-
-  function suggestions () {
-    const suggestionInput = document.getElementById = ("textInput");
-    console.log (suggestionInput.value)
-  }
-  
-  
-
   
   return (
     <div className="App">
@@ -78,33 +71,30 @@ function App() {
       </span>
 
       <div>
-          <h2>Any suggestions for the website? Submit them here!</h2>
-          <input id="textInput" placeholder="Enter text here">
-          </input>
-          <button id="formBtn"> Submit </button>
+        <h2>Leave your email below for updates</h2>
+        <forms>
+          <input type="text" id="email-input" placeholder="Enter email" ></input>
+          <button>Submit</button>
+        </forms>
       </div>
-
 
       <div className="moreinfo">
         <h2>Want to learn more about coffee (of course you do) </h2>
         <h3>Click the article you wish to read</h3>
-        <ul>
-          <li>
+            <div>
             <a target="_blank" href="https://www.medicalnewstoday.com/articles/270202">
               <button className="button1"> Coffee's health benefits</button>
             </a>
-          </li>
-          <li>
+            </div>
+            <div>
             <a target="_blank" href="https://www.bbc.com/future/bespoke/made-on-earth/how-the-world-came-to-run-on-coffee/">
               <button className="button2">Coffee's rise to popularity</button>
             </a>
-          </li>
-        </ul>
-        
+            </div>
       </div>
 
       <div>
-        <img className="coolpic" src="coolpic2"></img>
+        <img className="coolpic" src="coolpic2.png"></img>
       </div>
 
       <div>
