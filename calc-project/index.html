@@ -1,40 +1,30 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="calc.css"/>
-    <script src="calc.js"></script>
-  </head>
- </div>
- <body>
-   <div>
-    <table class="tablemain">
-        <thead>
-            <input class="inputbox" style="text"></input>
-        </thead>
-         <tr>
-             <td><button class="btn">7</button></td>
-             <td><button class="btn">8</button></td>
-             <td><button class="btn">9</button></td>
-             <td><button class="btn">+</button></td>
-         </tr>
-         <tr>
-             <td><button class="btn">4</button></td>
-             <td><button class="btn">5</button></td>
-             <td><button class="btn">6</button></td>
-             <td><button class="btn">-</button></td>
-         </tr>
-         <tr>
-             <td><button class="btn">1</button></td>
-             <td><button class="btn">2</button></td>
-             <td><button class="btn">3</button></td>
-             <td><button class="btn">x</button></td>
-         </tr>
-         <tr>
-            <td><button class="btn">0</button></td>
-            <td><button class="btn">.</button></td>
-            <td><button class="btn">=</button></td>
-            <td><button class="btn">/</button></td>
-         </tr>
-    </table>
-   </div>
- </body>
+<head>
+    <title> Calculator </title>
+    <link href="calc.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div id="calculator">
+    <div id="display"></div>
+    <button onclick="appendNumber('7')">7</button>
+    <button onclick="appendNumber('8')">8</button>
+    <button onclick="appendNumber('9')">9</button>
+    <button onclick="appendOperator('+')">+</button><br>
+    <button onclick="appendNumber('4')">4</button>
+    <button onclick="appendNumber('5')">5</button>
+    <button onclick="appendNumber('6')">6</button>
+    <button onclick="appendOperator('-')">-</button><br>
+    <button onclick="appendNumber('1')">1</button>
+    <button onclick="appendNumber('2')">2</button>
+    <button onclick="appendNumber('3')">3</button>
+    <button onclick="appendOperator('*')">*</button><br>
+    <button onclick="appendNumber('0')">0</button>
+    <button onclick="appendNumber('.')">.</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="appendOperator('/')">/</button>
+    <button id= "clear" onclick="document.getElementById('display').value=''">C</button>
+  </div>
+</body>
+  <script src="calc.js"></script>
 </html>

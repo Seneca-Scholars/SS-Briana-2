@@ -119,7 +119,7 @@ function App() {
           </option>
         </select>
       </div>
-
+      <h2>{shoppinglist.important1}{shoppinglist.important2}</h2>
     </div>
 
   )
