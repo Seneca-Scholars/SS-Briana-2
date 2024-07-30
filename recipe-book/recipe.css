@@ -1,4 +1,4 @@
-#body {
+#body-main-pg {
     display: grid;
     grid-template-columns: 40% 60%;
     background-color:#8E6E53;
@@ -14,6 +14,13 @@
     font-family:serif;
 
 }
+
+#body-form-pg {
+    background-color:#8E6E53;
+    color: white;
+    font-family:serif;
+    text-align:center;
+}
  
 img {
     width:40vw;
@@ -22,19 +29,20 @@ img {
     left:0;
     top:0;
     bottom:0;
-
 }
 
 h1 {
     text-align:center;
-    font-size: 40px;
+    font-size: 50px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    flex-wrap:wrap;
 }
+
 th {
     padding: 10px;
     border: 1px solid #ddd;
@@ -46,18 +54,17 @@ td {
     border: 1px solid #ddd;
     text-align: center;
 }
-.recipe img {
-    max-width: 100px;
-    height: auto;
+
+#form-text {
+    font-size:20px;
+} 
+
+input {
+    border: 1px solid black;
 }
-.recipe-details {
-    display: none;
-}
-.recipe-button {
-    cursor: pointer;
-    color: #007bff;
-    text-decoration: underline;
-}
+
+
+
 
 
 

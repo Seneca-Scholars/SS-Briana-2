@@ -3,11 +3,13 @@
 <head>
     <title>Submit Your Personal Recipe</title>
     <link href="recipe.css" rel="stylesheet" type="text/css" />
-    <a href="recipe.html">Main Menu</a>
 </head>
-<body>
+<body id="body-form-pg">
     <form>
-        <h1>Uploading your Personal Recipe to our Website!</h1>
+        <h1>Upload your Personal Recipe to our Website!</h1>
+
+        <div id="form-text">
+        <a href="recipe.html">Main Menu</a>
         <h3>Title of your Recipe:</h3>
         <input type="text" name="Title" required>
         <h3>List of Ingredients:</h3>
@@ -25,6 +27,7 @@
         <div>
             <p><span>Click Below to Submit:</span></p>
             <input action="recipes.json" type="submit" method="POST">
+        </div>
         </div>
 
     </form>
