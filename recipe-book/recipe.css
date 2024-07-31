@@ -64,6 +64,17 @@ td {
 
 }
 
-#form-text {
-    font-size:23px;
+a {
+    text-decoration: none;
+    color:white;
+    font-size: 23px;
+    font-style:italic;
+}
+
+a:hover {
+    color:blanchedalmond;
+}
+
+h3 { 
+    font-size: 23px;
 }
