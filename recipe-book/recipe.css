@@ -68,10 +68,6 @@ td {
     background: #0056b3;
 }
 
-ul, ol {
-    list-style-position:inherit;
-}
-
 #directory {
     display:flex;
     justify-content: space-around;
