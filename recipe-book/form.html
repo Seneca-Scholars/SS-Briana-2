@@ -13,30 +13,38 @@
             <a href="form.html"><b>Submission Request</b></a>
             <a href="aboutus.html"><b>About Us</b></a>
         </div>
+    </header>
+    <h1>Submission Form</h1>
+    <form id="recipeForm">
+        <div class="form-group">
+            <h3>Title of your Recipe:</h3>
+            <input type="text" id="title" name="title" required>
+        </div>
 
-        <h1>Upload Your Personal Recipe to Our Website!</h1>
+        <div class="form-group">
+            <h3>List of Ingredients:</h3>
+            <p><em>Note: Type one ingredient at a time</em></p>
+            <input type="text" id="ingredient" name="ingredients">
+            <div id="new-input-ingredients"></div>
+            <button type="button" class="button" onclick="addInputIngredients()">Add Extra Ingredient</button>
+        </div>
 
-        <h3>Title of Your Recipe:</h3>
-        <input type="text" id="title" name="title" required>
+        <div class="form-group">
+            <h3>Step by Step Instructions:</h3>
+            <p><em>Note: Type one step at a time</em></p>
+            <input type="text" id="step" name="steps">
+            <div id="new-input-steps"></div>
+            <button type="button" class="button" onclick="addInputSteps()">Add Extra Step</button>
+        </div>
 
-        <h3>List of Ingredients:</h3>
-        <p><em>Note: Type one ingredient at a time</em></p>
-        <input type="text" id="ingredient" name="ingredients">
-        <div id="new-input-ingredients"></div>
-        <button type="button" class="button" onclick="addInputIngredients()">Add Extra Ingredient</button>
-
-        <h3>Step-by-Step Instructions:</h3>
-        <p><em>Note: Type one step at a time</em></p>
-        <input type="text" id="step" name="steps">
-        <div id="new-input-steps"></div>
-        <button type="button" class="button" onclick="addInputSteps()">Add Extra Step</button>
-
-        <h3>Image URL:</h3>
-        <input type="text" id="image" name="image">
+        <div class="form-group">
+            <h3>Image URL:</h3>
+            <input type="text" id="image" name="image">
+        </div>
 
         <div>
             <h3><span>Click Below to Submit:</span></h3>
-            <input type="submit" value="Submit Recipe" class="button">
+            <input type="submit" value="Submit Recipe">
         </div>
     </form>
 
@@ -57,6 +65,24 @@
             container.appendChild(newElem);
         }
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const recipeToEdit = JSON.parse(localStorage.getItem('recipeToEdit'));
+            if (recipeToEdit) {
+                document.getElementById('title').value = recipeToEdit.recipe.Name;
+                recipeToEdit.recipe.Ingredients.forEach(ingredient => {
+                    addInputIngredients();
+                    document.querySelectorAll('input[name="ingredients"]')[document.querySelectorAll('input[name="ingredients"]').length - 1].value = ingredient.name;
+                });
+                recipeToEdit.recipe.Steps.forEach(step => {
+                    addInputSteps();
+                    document.querySelectorAll('input[name="steps"]')[document.querySelectorAll('input[name="steps"]').length - 1].value = step;
+                });
+                document.getElementById('image').value = recipeToEdit.recipe.Image;
+                document.getElementById('recipeForm').dataset.editIndex = recipeToEdit.index;
+                localStorage.removeItem('recipeToEdit');
+            }
+        });
+
         document.getElementById('recipeForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -72,12 +98,21 @@
                 Image: image
             };
 
+            const form = document.getElementById('recipeForm');
             let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
-            recipes.push(recipe);
-            localStorage.setItem('recipes', JSON.stringify(recipes));
 
-            alert('Recipe submitted successfully!');
-            document.getElementById('recipeForm').reset();
+            if (form.dataset.editIndex) {
+                const index = parseInt(form.dataset.editIndex);
+                recipes[index] = recipe;
+                alert('Recipe updated successfully!');
+                form.removeAttribute('data-edit-index');
+            } else {
+                recipes.push(recipe);
+                alert('Recipe submitted successfully!');
+            }
+
+            localStorage.setItem('recipes', JSON.stringify(recipes));
+            form.reset();
         });
     </script>
 </body>
