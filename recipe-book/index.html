@@ -6,89 +6,118 @@
 </head>
 <body id="body-main-pg">
 
-  <div id="side-bar"></div>
+    <div id="side-bar"></div>
 
-  <div id="main-content">
-    <div id="directory">
-        <a href="index.html"><b>Main Menu</b></a>
-        <a href="form.html"><b>Submission Request</b></a>
-        <a href="aboutus.html"><b>About Us</b></a>
+    <div id="main-content">
+      <div id="directory">
+          <a href="index.html"><b>Main Menu</b></a>
+          <a href="form.html"><b>Submission Request</b></a>
+          <a href="aboutus.html"><b>About Us</b></a>
+      </div>
+      <h1>Recipe Book</h1>
+      <table id="recipe-table">
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Details</th>
+              </tr>
+          </thead>
+          <tbody id="recipe-list"></tbody>
+      </table>
     </div>
-    <h1>Recipe Book</h1>
-    <table id="recipe-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Details</th>
-            </tr>
-        </thead>
-        <tbody id="recipe-list"></tbody>
-    </table>
-  </div>
-
-  <script>
-    // Function to load recipes from the JSON file
-    async function loadRecipes() {
-        try {
-            // Fetch data from the JSON file
-            const response = await fetch('recipes.json');
-            const recipes = await response.json();
-
-            // Get the table body element
-            const recipeList = document.getElementById('recipe-list');
-
-            // Create rows for each recipe
-            recipes.forEach((recipe, index) => {
-                // Create a row for the recipe
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${recipe.Name}</td>
-                    <td>${recipe.Image ? `<img src="${recipe.Image}" alt="${recipe.Name}">` : ''}</td>
-                    <td><span class="recipe-button" onclick="toggleDetails(${index})">Show Details</span></td>
-                `;
-
-                // Create a row for recipe details
-                const detailsRow = document.createElement('tr');
-                detailsRow.classList.add('recipe-details');
-                detailsRow.id = `recipe-details-${index}`;
-                detailsRow.innerHTML = `
-                    <td colspan="3">
-                        <h3>Ingredients:</h3>
-                        <ul>
-                            ${recipe.Ingredients.map(ingredient => `<li>${ingredient.amount} of ${ingredient.name}</li>`).join('')}
-                        </ul>
-                        <h3>Steps:</h3>
-                        <ol>
-                            ${recipe.Steps.map(step => `<li>${step}</li>`).join('')}
-                        </ol>
-                    </td>
-                `;
-
-                // Append rows to the table body
-                recipeList.appendChild(row);
-                recipeList.appendChild(detailsRow);
-            });
-        } catch (error) {
-            console.error('Error loading recipes:', error);
+ 
+    <script>
+        const recipes = [
+            {
+                "Name": "Baked Mac and Cheese",
+                "Ingredients": [
+                    {"name": "elbow pasta", "amount": "one 16 oz box"},
+                    {"name": "eggs", "amount": 2},
+                    {"name": "milk", "amount": "1 cup"},
+                    {"name": "salt", "amount": "1 tsp"},
+                    {"name": "black pepper", "amount": "1 tsp"},
+                    {"name": "onion powder", "amount": "1 tsp"},
+                    {"name": "butter", "amount": "1 stick"},
+                    {"name": "mozzarella", "amount": "1 cup"},
+                    {"name": "sharp cheddar", "amount": "1 cup"},
+                    {"name": "colby jack", "amount": "1 cup"}
+                ],
+                "Steps": [
+                    "Preheat the oven to 400 degrees.",
+                    "Boil the pasta until al dente.",
+                    "Drain pasta and put it in a pan.",
+                    "In the pot, mix milk, cheese, eggs, and seasoning over low heat.",
+                    "Pour the mixture over the pasta and mix.",
+                    "Top with more shredded cheese.",
+                    "Place in the oven and bake for 45 minutes or until the top is golden brown."
+                ],
+                "Image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRbMofYn9b1fd5-RVyV_J6Us2ZahtDAh7PkY0VPw4CsIsuozfT7"
+            },
+            {
+                "Name": "Fried Chicken",
+                "Ingredients": [
+                    {"name": "chicken pieces", "amount": "2 pounds"},
+                    {"name": "all-purpose flour", "amount": "2 cups"},
+                    {"name": "paprika", "amount": "2 tablespoons"},
+                    {"name": "garlic powder", "amount": "1 tablespoon"},
+                    {"name": "onion powder", "amount": "1 tablespoon"},
+                    {"name": "cayenne pepper", "amount": "1 tablespoon"},
+                    {"name": "salt", "amount": "1 teaspoon"},
+                    {"name": "black pepper", "amount": "1 teaspoon"},
+                    {"name": "buttermilk", "amount": "1 cup"},
+                    {"name": "vegetable oil", "amount": "3 cups"}
+                ],
+                "Steps": [
+                    "Wash the chicken.",
+                    "Season the chicken.",
+                    "Coat the chicken in flour.",
+                    "Fry the chicken."
+                ],
+                "Image": "https://pressureluckcooking.com/wp-content/uploads/2020/03/Fried-Chicken-720x540.jpg"
+            }
+        ];
+ 
+        const recipeList = document.getElementById('recipe-list');
+ 
+        recipes.forEach((recipe, index) => {
+            const row = document.createElement('tr');
+ 
+            row.innerHTML = `
+                <td>${recipe.Name}</td>
+                <td><button class="recipe-button" id="button-${index}" onclick="toggleDetails(${index})">Show Details</button></td>
+            `;
+ 
+            const detailsRow = document.createElement('tr');
+            detailsRow.classList.add('recipe-details');
+            detailsRow.id = `recipe-details-${index}`;
+            detailsRow.innerHTML = `
+                <td colspan="2">
+                    <h3>Ingredients:</h3>
+                    <ul>
+                        ${recipe.Ingredients.map(ingredient => `<li>${ingredient.amount} of ${ingredient.name}</li>`).join('')}
+                    </ul>
+                    <h3>Steps:</h3>
+                    <ol>
+                        ${recipe.Steps.map(step => `<li>${step}</li>`).join('')}
+                    </ol>
+                </td>
+            `;
+ 
+            recipeList.appendChild(row);
+            recipeList.appendChild(detailsRow);
+        });
+ 
+        function toggleDetails(index) {
+            const details = document.getElementById(`recipe-details-${index}`);
+            const button = details.previousElementSibling.querySelector('.recipe-button');
+            if (details.style.display === 'none' || details.style.display === '') {
+                details.style.display = 'table-row';
+                button.textContent = 'Hide Details';
+            } else {
+                details.style.display = 'none';
+                button.textContent = 'Show Details';
+            }
         }
-    }
-
-    // Function to toggle recipe details
-    function toggleDetails(index) {
-        const details = document.getElementById(`recipe-details-${index}`);
-        const button = details.previousElementSibling.querySelector('.recipe-button');
-        if (details.style.display === 'none' || details.style.display === '') {
-            details.style.display = 'table-row';
-            button.textContent = 'Hide Details';
-        } else {
-            details.style.display = 'none';
-            button.textContent = 'Show Details';
-        }
-    }
-
-    // Load recipes when the page is ready
-    document.addEventListener('DOMContentLoaded', loadRecipes);
-</script>
-</body>
+    </script>
+ </body>
 </html>
