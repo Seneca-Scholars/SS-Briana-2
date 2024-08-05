@@ -6,7 +6,7 @@
     <title>Submit Your Personal Recipe</title>
     <link href="recipe.css" rel="stylesheet" type="text/css" />
 </head>
-<body id="form-aboutus">
+<body>
     <form>
         <div id="directory">
             <a href="index.html"><b>Main Menu</b></a>
@@ -71,15 +71,20 @@
                 document.getElementById('title').value = recipeToEdit.recipe.Name;
                 recipeToEdit.recipe.Ingredients.forEach(ingredient => {
                     addInputIngredients();
-                    document.querySelectorAll('input[name="ingredients"]')[document.querySelectorAll('input[name="ingredients"]').length - 1].value = ingredient.name;
+                    const inputs = document.querySelectorAll('input[name="ingredients"]');
+                    inputs[inputs.length - 1].value = ingredient.name;
                 });
                 recipeToEdit.recipe.Steps.forEach(step => {
                     addInputSteps();
-                    document.querySelectorAll('input[name="steps"]')[document.querySelectorAll('input[name="steps"]').length - 1].value = step;
+                    const inputs = document.querySelectorAll('input[name="steps"]');
+                    inputs[inputs.length - 1].value = step;
                 });
                 document.getElementById('image').value = recipeToEdit.recipe.Image;
                 document.getElementById('recipeForm').dataset.editIndex = recipeToEdit.index;
+                document.getElementById('deleteButton').style.display = 'inline'; // Show delete button
                 localStorage.removeItem('recipeToEdit');
+            } else {
+                document.getElementById('deleteButton').style.display = 'none'; // Hide delete button if no recipe to edit
             }
         });
 
@@ -113,8 +118,21 @@
 
             localStorage.setItem('recipes', JSON.stringify(recipes));
             form.reset();
+            document.getElementById('deleteButton').style.display = 'none'; // Hide delete button after submission
         });
+
+        function deleteRecipe() {
+            const form = document.getElementById('recipeForm');
+            const index = parseInt(form.dataset.editIndex);
+
+            if (index !== undefined) {
+                let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+                recipes.splice(index, 1); // Remove recipe at the specified index
+                localStorage.setItem('recipes', JSON.stringify(recipes));
+                alert('Recipe deleted successfully!');
+                window.location.href = 'index.html'; // Redirect to main page
+            }
+        }
     </script>
 </body>
-
 </html>

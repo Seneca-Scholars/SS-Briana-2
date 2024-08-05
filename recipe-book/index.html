@@ -4,9 +4,7 @@
     <link href="recipe.css" rel="stylesheet" type="text/css" />
     <title>Simple Recipe Book</title>
 </head>
-<body id="body-main-pg">
-
-    <div id="side-bar"></div>
+<body>
 
     <div id="main-content">
       <div id="directory">
@@ -14,7 +12,7 @@
           <a href="form.html"><b>Submission Request</b></a>
           <a href="aboutus.html"><b>About Us</b></a>
       </div>
-      <h1>Recipe Book</h1>
+      <h1><img id="title-pic" src="tools.png"> Recipe Book <img id="title-pic" src="tools.png"></h1>
       <table id="recipe-table">
         <thead>
             <tr>
@@ -28,7 +26,6 @@
   
   
     <script>
-        // Hardcoded recipes
         const hardcodedRecipes = [
             {
                 "Name": "Baked Mac and Cheese",
@@ -78,34 +75,28 @@
                 "Image": "https://pressureluckcooking.com/wp-content/uploads/2020/03/Fried-Chicken-720x540.jpg"
             }
         ];
-  
-  
+
         function loadRecipes() {
             const recipeList = document.getElementById('recipe-list');
             let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
-  
-  
-            // Combine hardcoded recipes with local storage recipes
             recipes = hardcodedRecipes.concat(recipes);
-  
-  
+
             recipeList.innerHTML = ''; // Clear existing recipes
-  
-  
-            for (let index = 0; index < recipes.length; index++){
+
+            for (let index = 0; index < recipes.length; index++) {
                 const row = document.createElement('tr');
                 const recipe = recipes[index];
-  
-  
+
                 row.innerHTML = `
                     <td>${recipe.Name}</td>
                     <td><button class="recipe-button" id="button-${index}" onclick="toggleDetails(${index})">Show Details</button></td>
-                    <td><button class="edit-button" onclick="editRecipe(${index})">Edit</button></td>
+                    <td>
+                        <button class="edit-button" onclick="editRecipe(${index})">Edit</button>
+                        <button class="delete-button" onclick="deleteRecipe(${index})">Delete</button>
+                    </td>
                 `;
-  
-  
+
                 const detailsRow = document.createElement('tr');
-               
                 detailsRow.classList.add('recipe-details');
                 detailsRow.id = `recipe-details-${index}`;
                 detailsRow.innerHTML = `
@@ -121,14 +112,12 @@
                         ${recipe.Image ? `<h3>Image:</h3><img src="${recipe.Image}" alt="${recipe.Name}">` : ''}
                     </td>
                 `;
-  
-  
+
                 recipeList.appendChild(row);
                 recipeList.appendChild(detailsRow);
-            };
+            }
         }
-  
-  
+
         function toggleDetails(index) {
             const details = document.getElementById(`recipe-details-${index}`);
             const button = details.previousElementSibling.querySelector('.recipe-button');
@@ -140,17 +129,23 @@
                 button.textContent = 'Show Details';
             }
         }
-  
-  
+
         function editRecipe(index) {
             const recipes = JSON.parse(localStorage.getItem('recipes')) || [];
             const recipeToEdit = hardcodedRecipes.concat(recipes)[index];
             localStorage.setItem('recipeToEdit', JSON.stringify({ index: index, recipe: recipeToEdit }));
             window.location.href = 'form.html';
         }
-  
-  
+
+        function deleteRecipe(index) {
+            let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+            recipes = recipes.filter((_, i) => i !== index); // Remove the recipe at the specified index
+            localStorage.setItem('recipes', JSON.stringify(recipes));
+            alert('Recipe deleted successfully!');
+            loadRecipes(); // Reload the recipes after deletion
+        }
+
         document.addEventListener('DOMContentLoaded', loadRecipes);
     </script>
-  </body>
+</body>
 </html>
