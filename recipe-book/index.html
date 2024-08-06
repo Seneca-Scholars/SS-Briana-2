@@ -26,20 +26,20 @@
   
   
     <script>
-        const hardcodedRecipes = [
+        let hardcodedRecipes = [
             {
                 "Name": "Baked Mac and Cheese",
                 "Ingredients": [
-                    {"name": "elbow pasta", "amount": "one 16 oz box"},
-                    {"name": "eggs", "amount": 2},
-                    {"name": "milk", "amount": "1 cup"},
-                    {"name": "salt", "amount": "1 tsp"},
-                    {"name": "black pepper", "amount": "1 tsp"},
-                    {"name": "onion powder", "amount": "1 tsp"},
-                    {"name": "butter", "amount": "1 stick"},
-                    {"name": "mozzarella", "amount": "1 cup"},
-                    {"name": "sharp cheddar", "amount": "1 cup"},
-                    {"name": "colby jack", "amount": "1 cup"}
+                    { "name": "elbow pasta", "amount": "one 16 oz box" },
+                    { "name": "eggs", "amount": 2 },
+                    { "name": "milk", "amount": "1 cup" },
+                    { "name": "salt", "amount": "1 tsp" },
+                    { "name": "black pepper", "amount": "1 tsp" },
+                    { "name": "onion powder", "amount": "1 tsp" },
+                    { "name": "butter", "amount": "1 stick" },
+                    { "name": "mozzarella", "amount": "1 cup" },
+                    { "name": "sharp cheddar", "amount": "1 cup" },
+                    { "name": "colby jack", "amount": "1 cup" }
                 ],
                 "Steps": [
                     "Preheat the oven to 400 degrees.",
@@ -55,16 +55,16 @@
             {
                 "Name": "Fried Chicken",
                 "Ingredients": [
-                    {"name": "chicken pieces", "amount": "2 pounds"},
-                    {"name": "all-purpose flour", "amount": "2 cups"},
-                    {"name": "paprika", "amount": "2 tablespoons"},
-                    {"name": "garlic powder", "amount": "1 tablespoon"},
-                    {"name": "onion powder", "amount": "1 tablespoon"},
-                    {"name": "cayenne pepper", "amount": "1 tablespoon"},
-                    {"name": "salt", "amount": "1 teaspoon"},
-                    {"name": "black pepper", "amount": "1 teaspoon"},
-                    {"name": "buttermilk", "amount": "1 cup"},
-                    {"name": "vegetable oil", "amount": "3 cups"}
+                    { "name": "chicken pieces", "amount": "2 pounds" },
+                    { "name": "all-purpose flour", "amount": "2 cups" },
+                    { "name": "paprika", "amount": "2 tablespoons" },
+                    { "name": "garlic powder", "amount": "1 tablespoon" },
+                    { "name": "onion powder", "amount": "1 tablespoon" },
+                    { "name": "cayenne pepper", "amount": "1 tablespoon" },
+                    { "name": "salt", "amount": "1 teaspoon" },
+                    { "name": "black pepper", "amount": "1 teaspoon" },
+                    { "name": "buttermilk", "amount": "1 cup" },
+                    { "name": "vegetable oil", "amount": "3 cups" }
                 ],
                 "Steps": [
                     "Wash the chicken.",
@@ -80,7 +80,6 @@
             const recipeList = document.getElementById('recipe-list');
             let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
             recipes = hardcodedRecipes.concat(recipes);
-
             recipeList.innerHTML = ''; // Clear existing recipes
 
             for (let index = 0; index < recipes.length; index++) {
@@ -88,30 +87,30 @@
                 const recipe = recipes[index];
 
                 row.innerHTML = `
-                    <td>${recipe.Name}</td>
-                    <td><button class="recipe-button" id="button-${index}" onclick="toggleDetails(${index})">Show Details</button></td>
-                    <td>
-                        <button class="edit-button" onclick="editRecipe(${index})">Edit</button>
-                        <button class="delete-button" onclick="deleteRecipe(${index})">Delete</button>
-                    </td>
-                `;
+                <td>${recipe.Name}</td>
+                <td><button class="recipe-button" id="button-${index}" onclick="toggleDetails(${index})">Show Details</button></td>
+                <td>
+                    <button class="edit-button" onclick="editRecipe(${index})">Edit</button>
+                    <button class="delete-button" onclick="deleteRecipe(${index})">Delete</button>
+                </td>
+            `;
 
                 const detailsRow = document.createElement('tr');
                 detailsRow.classList.add('recipe-details');
                 detailsRow.id = `recipe-details-${index}`;
                 detailsRow.innerHTML = `
-                    <td colspan="3">
-                        <h3>Ingredients:</h3>
-                        <ul>
-                            ${recipe.Ingredients.map(ingredient => `<li>${ingredient.amount} of ${ingredient.name}</li>`).join('')}
-                        </ul>
-                        <h3>Steps:</h3>
-                        <ol>
-                            ${recipe.Steps.map(step => `<li>${step}</li>`).join('')}
-                        </ol>
-                        ${recipe.Image ? `<h3>Image:</h3><img src="${recipe.Image}" alt="${recipe.Name}">` : ''}
-                    </td>
-                `;
+                <td colspan="3">
+                    <h3>Ingredients:</h3>
+                    <ul>
+                        ${recipe.Ingredients.map(ingredient => `<li>${ingredient.amount} of ${ingredient.name}</li>`).join('')}
+                    </ul>
+                    <h3>Steps:</h3>
+                    <ol>
+                        ${recipe.Steps.map(step => `<li>${step}</li>`).join('')}
+                    </ol>
+                    ${recipe.Image ? `<h3>Image:</h3><img src="${recipe.Image}" alt="${recipe.Name}">` : ''}
+                </td>
+            `;
 
                 recipeList.appendChild(row);
                 recipeList.appendChild(detailsRow);
@@ -139,7 +138,11 @@
 
         function deleteRecipe(index) {
             let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
-            recipes = recipes.filter((_, i) => i !== index); // Remove the recipe at the specified index
+            let newIndex = index - 2
+            console.log(index)
+            console.log(recipes)
+            recipes.splice(newIndex, 1);
+            console.log(recipes)
             localStorage.setItem('recipes', JSON.stringify(recipes));
             alert('Recipe deleted successfully!');
             loadRecipes(); // Reload the recipes after deletion
