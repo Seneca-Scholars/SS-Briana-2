@@ -1,7 +1,19 @@
-import { useEffect } from 'react';
 import './App.css';
 
+let currentOffset = 0;
+let currentLimit = 10;
+
 function App() {
+
+  const numberClicked = event.target.attributes["data-num"].nodeValue;
+
+  const fetchData = aysnc () => {
+    try {
+      const response = await fetch ("https://pokeapi.co/api/v2/pokemon/" + numberClicked + "/")
+    }
+  }
+
+
   return (
     <div className="app">
       <header className="app-header">
