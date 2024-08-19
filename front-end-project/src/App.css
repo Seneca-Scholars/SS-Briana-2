@@ -1,12 +1,7 @@
-header {
-  text-align:center;
-  font-size: 50px;
-  padding: 20px;
-}
-
 body {
   text-align:center;
   font-size: 35px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .main {
@@ -14,8 +9,24 @@ body {
   justify-content: center;
 }
 
-table, td, th {
-  border: 1px solid gray;
-  padding:15px;
-
+table, td,  th {
+  padding:20px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  border-spacing: 20px;
+  color:#FFFCF7;
 }
+
+thead {
+  border: 1px solid gray;
+  background-color: #738290;
+  border-radius: 30px;
+}
+
+tbody {
+  border: 1px solid gray;
+  background-color: #A1B5D8;
+  border-radius: 20px;
+  border-spacing: 20px;
+}
+
