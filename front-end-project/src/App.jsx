@@ -7,7 +7,6 @@ function App() {
   const [data, setData] = useState([]);
   const [error, setError] = useState (null);
   
-  
   useEffect(() => {
     //async so the data is there before state is updated
     const fetchData = async () => {
@@ -37,8 +36,9 @@ function App() {
   //calls function
   fetchData ();
 }, []) //runs once
-
-
+ 
+//displays only 7 rows of data
+const limitItems = data.slice (0, 7);
 
 return (
   <div className="app">
@@ -52,7 +52,7 @@ return (
         </thead>
         <tbody>
 {/*makes rows + columns for each object*/}
-          {data.map(user => (
+          {limitItems.map(user => (
             <tr key={user.id}>
               <td>{user.name}</td>
               <td>{user.email}</td>
