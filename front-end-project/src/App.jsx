@@ -11,7 +11,7 @@ function App() {
     //async so the data is there before state is updated
     const fetchData = async () => {
       //url w/ the data being used
-      const url = 'https://jsonplaceholder.typicode.com/users';
+      const url = 'http://localhost:3000/api/items'
 
       try {
         //requests data from url + waits for response
@@ -52,10 +52,10 @@ return (
         </thead>
         <tbody>
 {/*makes rows + columns for each object*/}
-          {limitItems.map(user => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
+          {limitItems.map(data => (
+            <tr key={data.id}>
+              <td>{data.id}</td>
+              <td>{data.data}</td>
             </tr>
           ))}
         </tbody>
