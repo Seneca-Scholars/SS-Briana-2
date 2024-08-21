@@ -11,7 +11,7 @@ function App() {
     //async so the data is there before state is updated
     const fetchData = async () => {
       //url w/ the data being used
-      const url = 'http://localhost:3000/api/items'
+      const url = '/api/items'
 
       try {
         //requests data from url + waits for response
@@ -64,6 +64,5 @@ return (
   </div>
 );
 }
-
 
 export default App;
