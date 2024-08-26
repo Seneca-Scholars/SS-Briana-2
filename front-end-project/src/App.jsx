@@ -5,6 +5,7 @@ import './App.css';
 function App() {
   //state variables + the functions to update w/ initial value
   const [data, setData] = useState([]);
+  const [form, setForm] = useState([]);
   const [error, setError] = useState (null);
   
   useEffect(() => {
@@ -36,6 +37,27 @@ function App() {
   //calls function
   fetchData ();
 }, []) //runs once
+
+//handles changes in the form
+const formChange = (event) => {
+
+  //only affects the specfic field that changes
+  const { name, value } = event.target; 
+
+  //existing data is copied into new object + sets new value 
+  setForm (prevFormData => ({
+    ...prevFormData, 
+    [name]:value
+  })); 
+};
+
+const formEdit = (event) => {
+
+}
+
+const formDelete = (event) => {
+
+}
  
 //displays only 7 rows of data
 const limitItems = data.slice (0, 7);
@@ -46,8 +68,10 @@ return (
       <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Name</th>
-            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
           </tr>
         </thead>
         <tbody>
@@ -55,11 +79,56 @@ return (
           {limitItems.map(data => (
             <tr key={data.id}>
               <td>{data.id}</td>
-              <td>{data.data}</td>
+              <td>{data.name}</td>
+              <td>{data.phone}</td>
+              <td>{data.address}</td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <form>
+        <div>
+        <label>Name: 
+          <input
+            type='text'
+            name='name'
+            value={form.name}
+            onChange={formChange}
+            placeholder='Enter Name'
+          />
+        </label>
+        </div>
+
+        <div>
+        <label>Phone: 
+          <input
+            type='text'
+            name='phone'
+            value={form.phone}
+            onChange={formChange}
+            placeholder='Enter Phone #'
+          />
+        </label>
+        </div>
+
+        <div>
+        <label>Address: 
+          <input
+            type='text'
+            name='address'
+            value={form.address}
+            onChange={formChange}
+            placeholder='Enter Address'
+          />
+        </label>
+        </div>
+      </form>
+
+      <div>
+        <button onClick= {() => formEdit(item)}>Edit</button>
+        <button onClick= {() => formDelete(item.id)}>Delete</button>
+      </div>
     </div>
   </div>
 );
