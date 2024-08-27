@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-
 function App() {
   //state variables + the functions to update w/ initial value
   const [data, setData] = useState([]);
-  const [form, setForm] = useState([]);
-  const [error, setError] = useState (null);
-  
+  const [form, setForm] = useState({});
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     //async so the data is there before state is updated
     const fetchData = async () => {
@@ -30,7 +29,7 @@ function App() {
 
         //handles any errors + shows in console + updates error
       } catch (error) {
-        console.log ('error')
+        console.log(error);
         setError(error);
       }
     }
@@ -51,87 +50,141 @@ const formChange = (event) => {
   })); 
 };
 
-const formEdit = (event) => {
+// Handles editing an individual item
+const formEdit = (item) => {
+  setForm({
+    id: item.id,
+    name: item.name,
+    phone: item.phone,
+    address: item.address
+  });
+};
 
-}
+// Handles the delete button
+const formDelete = (id) => {
+  const newData = data.filter(item => item.id !== id);
+  setData(newData);
+};
 
-const formDelete = (event) => {
+// Handles form submission
+const formSubmit = async (event) => {
+  event.preventDefault();
+  const url = '/api/items';
 
-}
+  //only updates it the id exists
+  if (form.id) {
+    try {
+
+      //updates id found in the url
+      const response = await fetch(`${url}/${form.id}`, {
+        //update existing item
+        method: 'PUT',
+        //json format
+        headers: { 'Content-Type': 'application/json' },
+        //changes new data into json
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          address: form.address
+        })
+      });
+
+      //checks if response is successful
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      //waits till converted to json
+      const updateItem = await response.json();
+
+      //if a certain item is edited it's replaced
+      setData(data.map(item => (item.id === form.id ? updateItem : item)));
+      
+      //resets the form
+      setForm({});
+
+      //handles any errors + shows in console + updates error
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    }
+  }
+};
  
 //displays only 7 rows of data
 const limitItems = data.slice (0, 7);
 
-return (
-  <div className="app">
-    <div className="main">
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Address</th>
-          </tr>
-        </thead>
-        <tbody>
-{/*makes rows + columns for each object*/}
-          {limitItems.map(data => (
-            <tr key={data.id}>
-              <td>{data.id}</td>
-              <td>{data.name}</td>
-              <td>{data.phone}</td>
-              <td>{data.address}</td>
+  return (
+    <div className="app">
+      <div className="main">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <form>
-        <div>
-        <label>Name: 
-          <input
-            type='text'
-            name='name'
-            value={form.name}
-            onChange={formChange}
-            placeholder='Enter Name'
-          />
-        </label>
-        </div>
-
-        <div>
-        <label>Phone: 
-          <input
-            type='text'
-            name='phone'
-            value={form.phone}
-            onChange={formChange}
-            placeholder='Enter Phone #'
-          />
-        </label>
-        </div>
-
-        <div>
-        <label>Address: 
-          <input
-            type='text'
-            name='address'
-            value={form.address}
-            onChange={formChange}
-            placeholder='Enter Address'
-          />
-        </label>
-        </div>
-      </form>
-
-      <div>
-        <button onClick= {() => formEdit(item)}>Edit</button>
-        <button onClick= {() => formDelete(item.id)}>Delete</button>
+          </thead>
+          <tbody>
+            {limitItems.map(item => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.phone}</td>
+                <td>{item.address}</td>
+                <td>
+                  <button onClick={() => formEdit(item)}>Edit</button>
+                  <button onClick={() => formDelete(item.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+    <div className='input-box'>
+      <form onSubmit={formSubmit}>
+        <div>
+          <label>Name:
+            <input
+              type='text'
+              name='name'
+              value={form.name || ''}
+              onChange={formChange}
+              placeholder='Enter Name'
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>Phone:
+            <input
+              type='text'
+              name='phone'
+              value={form.phone || ''}
+              onChange={formChange}
+              placeholder='Enter Phone'
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>Address:
+            <input
+              type='text'
+              name='address'
+              value={form.address || ''}
+              onChange={formChange}
+              placeholder='Enter Address'
+            />
+          </label>
+        </div>
+        <button type='submit'>Submit</button>
+      </form>
     </div>
-  </div>
-);
+    </div>
+  );
 }
 
 export default App;
