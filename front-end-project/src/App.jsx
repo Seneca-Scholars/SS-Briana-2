@@ -50,7 +50,7 @@ const formChange = (event) => {
   })); 
 };
 
-// Handles editing an individual item
+// handles editing an individual item
 const formEdit = (item) => {
   setForm({
     id: item.id,
@@ -60,21 +60,23 @@ const formEdit = (item) => {
   });
 };
 
-// Handles the delete button
+// handles the delete button
 const formDelete = (id) => {
+  //makes sure that there aren't duplicates
   const newData = data.filter(item => item.id !== id);
+
+  //updates data displayed
   setData(newData);
 };
 
-// Handles form submission
+//handles form submission
 const formSubmit = async (event) => {
   event.preventDefault();
   const url = '/api/items';
 
   //only updates it the id exists
-  if (form.id) {
-    try {
-
+  try {
+    if (form.id) {
       //updates id found in the url
       const response = await fetch(`${url}/${form.id}`, {
         //update existing item
@@ -94,20 +96,31 @@ const formSubmit = async (event) => {
         throw new Error('Network response was not ok');
       }
 
-      //waits till converted to json
+      //changes response to json
       const updateItem = await response.json();
 
       //if a certain item is edited it's replaced
       setData(data.map(item => (item.id === form.id ? updateItem : item)));
-      
+
+
+    } else {
+      const newData = {
+        //spreads out the data entered in the form (name, phone, address)
+        ...form,
+
+        //makes sure the arrary of data entered is formatted correctly (new id # is +1 of previous or just 1)
+        id: data.length ? Math.max (...data.map(item => item.id)) +1 : 1
+      };
+
+      setData([...data, newData]);
+    } 
+          
       //resets the form
       setForm({});
 
-      //handles any errors + shows in console + updates error
-    } catch (error) {
-      console.log(error);
-      setError(error);
-    }
+  } catch (error) {
+    console.log(error);
+    setError(error);
   }
 };
  
@@ -162,7 +175,7 @@ const limitItems = data.slice (0, 7);
             <input
               type='text'
               name='phone'
-              value={form.phone || ''}
+              value={form.phone}
               onChange={formChange}
               placeholder='Enter Phone'
             />
@@ -174,7 +187,7 @@ const limitItems = data.slice (0, 7);
             <input
               type='text'
               name='address'
-              value={form.address || ''}
+              value={form.address}
               onChange={formChange}
               placeholder='Enter Address'
             />

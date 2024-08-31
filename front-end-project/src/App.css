@@ -28,9 +28,16 @@ thead, .input-box {
 
 tbody {
   border: 1px solid gray;
-  background-color: #A1B5D8;
   border-radius: 20px;
   border-spacing: 20px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #A1B5D8;
+}
+
+tbody tr:nth-child(odd) {
+  background-color:#BFCDE5;
 }
 
 button {
