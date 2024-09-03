@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
 function App() {
   //state variables + the functions to update w/ initial value
@@ -122,6 +123,8 @@ const formSubmit = async (event) => {
     console.log(error);
     setError(error);
   }
+
+  const apiKey = 'AIzaSyCR1_ZW5wFdWmrrV8ZjN0xYcv5soGdq0_g'
 };
  
 //displays only 7 rows of data
@@ -196,6 +199,13 @@ const limitItems = data.slice (0, 7);
         <button type='submit'>Submit</button>
       </form>
     </div>
+        <APIProvider apiKey={'AIzaSyCR1_ZW5wFdWmrrV8ZjN0xYcv5soGdq0_g'}>
+            <h1>Google Maps</h1>
+            <Map
+              defaultZoom={15}
+              defaultCenter={ {lat:41.881832, lng:-87.623177 } }>
+            </Map>
+        </APIProvider>
     </div>
   );
 }
