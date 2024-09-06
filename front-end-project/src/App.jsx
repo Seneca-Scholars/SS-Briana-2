@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
+const apiKey = 'AIzaSyDHtCCivi-z7vqycrHlseu-VYX1mMYkqtM'
+
 function App() {
   //state variables + the functions to update w/ initial value
   const [data, setData] = useState([]);
@@ -124,7 +126,6 @@ const formSubmit = async (event) => {
     setError(error);
   }
 
-  const apiKey = 'AIzaSyCR1_ZW5wFdWmrrV8ZjN0xYcv5soGdq0_g'
 };
  
 //displays only 7 rows of data
@@ -166,7 +167,7 @@ const limitItems = data.slice (0, 7);
             <input
               type='text'
               name='name'
-              value={form.name || ''}
+              value={form.name}
               onChange={formChange}
               placeholder='Enter Name'
             />
@@ -199,13 +200,23 @@ const limitItems = data.slice (0, 7);
         <button type='submit'>Submit</button>
       </form>
     </div>
-        <APIProvider apiKey={'AIzaSyCR1_ZW5wFdWmrrV8ZjN0xYcv5soGdq0_g'}>
-            <h1>Google Maps</h1>
+    <div>
+        {/* provides this section with the api + logs the success */}
+        <APIProvider API={apiKey} onLoad={() => console.log('Map successfully loaded!')}>
+            <h3>Google Maps</h3>
             <Map
+
+              //intial settings of the map when the page is loaded
               defaultZoom={15}
-              defaultCenter={ {lat:41.881832, lng:-87.623177 } }>
-            </Map>
+              defaultCenter={ {lat:41.881832, lng:-87.623177 } }
+            
+              //logs changes made to map view + zoom
+              onCameraChanged={(ev) => 
+                console.log('camera changed:', ev.detail.center, 'zoom', ev.detail.zoom) 
+              }
+            />
         </APIProvider>
+      </div>
     </div>
   );
 }
