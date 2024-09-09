@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
-const apiKey = 'AIzaSyDHtCCivi-z7vqycrHlseu-VYX1mMYkqtM'
+const apiKey = 'AIzaSyC1HOdITdS-2b4X5L_nV9-Ziyg0sErFkzA'
 
 function App() {
   //state variables + the functions to update w/ initial value
@@ -200,11 +200,13 @@ const limitItems = data.slice (0, 7);
         <button type='submit'>Submit</button>
       </form>
     </div>
-    <div>
+    <div className=''>
         {/* provides this section with the api + logs the success */}
-        <APIProvider API={apiKey} onLoad={() => console.log('Map successfully loaded!')}>
+        <APIProvider apiKey={apiKey} onLoad={() => console.log('Map successfully loaded!')}>
             <h3>Google Maps</h3>
-            <Map
+
+            <div className='map-container'>
+            <Map className='map'
 
               //intial settings of the map when the page is loaded
               defaultZoom={15}
@@ -212,9 +214,10 @@ const limitItems = data.slice (0, 7);
             
               //logs changes made to map view + zoom
               onCameraChanged={(ev) => 
-                console.log('camera changed:', ev.detail.center, 'zoom', ev.detail.zoom) 
+              console.log('camera changed:', ev.detail.center, 'zoom', ev.detail.zoom) 
               }
             />
+            </div>
         </APIProvider>
       </div>
     </div>

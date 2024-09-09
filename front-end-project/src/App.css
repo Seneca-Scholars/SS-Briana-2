@@ -17,7 +17,7 @@ table, td,  th {
   color:#FFFCF7;
 }
 
-thead, .input-box {
+thead, .input-box, h3 {
   border: 1px solid gray;
   background-color: #738290;
   border-radius: 30px;
@@ -61,4 +61,23 @@ input {
   padding: 5px;
   border-radius: 5px;
   border: 1px solid gray;
+}
+
+.map-container {
+  display: flex;
+  justify-content: center;
+}
+
+h3 {
+  width:80%;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 25px;
+  padding: 15px;
+}
+
+.map {
+  width: 80%;
+  height: 500px;
+  position: relative;
 }
