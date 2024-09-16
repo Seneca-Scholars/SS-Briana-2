@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
 const apiKey = 'AIzaSyC1HOdITdS-2b4X5L_nV9-Ziyg0sErFkzA'
@@ -44,13 +44,13 @@ function App() {
 const formChange = (event) => {
 
   //only affects the specfic field that changes
-  const { name, value } = event.target; 
+  const { name, value } = event.target;
 
-  //existing data is copied into new object + sets new value 
+  //existing data is copied into new object + sets new value
   setForm (prevFormData => ({
-    ...prevFormData, 
+    ...prevFormData,
     [name]:value
-  })); 
+  }));
 };
 
 // handles editing an individual item
@@ -116,8 +116,8 @@ const formSubmit = async (event) => {
       };
 
       setData([...data, newData]);
-    } 
-          
+    }
+
       //resets the form
       setForm({});
 
@@ -127,83 +127,87 @@ const formSubmit = async (event) => {
   }
 
 };
- 
+
 //displays only 7 rows of data
 const limitItems = data.slice (0, 7);
 
+
   return (
-    <div className="app">
-      <div className="main">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Address</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {limitItems.map(item => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.phone}</td>
-                <td>{item.address}</td>
-                <td>
-                  <button onClick={() => formEdit(item)}>Edit</button>
-                  <button onClick={() => formDelete(item.id)}>Delete</button>
-                </td>
+    <div className='app'>
+      <div className='main'>
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    <div className='input-box'>
-      <form onSubmit={formSubmit}>
-        <div>
-          <label>Name:
-            <input
-              type='text'
-              name='name'
-              value={form.name}
-              onChange={formChange}
-              placeholder='Enter Name'
-            />
-          </label>
+            </thead>
+            <tbody>
+              {limitItems.map(item => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.name}</td>
+                  <td>{item.phone}</td>
+                  <td>{item.address}</td>
+                  <td>
+                    <button onClick={() => formEdit(item)}>Edit</button>
+                    <button onClick={() => formDelete(item.id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
-        <div>
-          <label>Phone:
-            <input
-              type='text'
-              name='phone'
-              value={form.phone}
-              onChange={formChange}
-              placeholder='Enter Phone'
-            />
-          </label>
+        <div className='input-box'>
+          <form onSubmit={formSubmit}>
+            <div>
+              <label>Name:
+                <input
+                  type='text'
+                  name='name'
+                  value={form.name}
+                  onChange={formChange}
+                  placeholder='Enter Name'
+                />
+              </label>
+            </div>
+
+            <div>
+              <label>Phone:
+                <input
+                  type='text'
+                  name='phone'
+                  value={form.phone}
+                  onChange={formChange}
+                  placeholder='Enter Phone'
+                />
+              </label>
+            </div>
+
+            <div>
+              <label>Address:
+                <input
+                  type='text'
+                  name='address'
+                  value={form.address}
+                  onChange={formChange}
+                  placeholder='Enter Address'
+                />
+              </label>
+            </div>
+            <button type='submit'>Submit</button>
+          </form>
+        </div>
         </div>
 
-        <div>
-          <label>Address:
-            <input
-              type='text'
-              name='address'
-              value={form.address}
-              onChange={formChange}
-              placeholder='Enter Address'
-            />
-          </label>
-        </div>
-        <button type='submit'>Submit</button>
-      </form>
-    </div>
     <div className=''>
         {/* provides this section with the api + logs the success */}
         <APIProvider apiKey={apiKey} onLoad={() => console.log('Map successfully loaded!')}>
-            <h3>Google Maps</h3>
 
             <div className='map-container'>
             <Map className='map'
@@ -211,10 +215,10 @@ const limitItems = data.slice (0, 7);
               //intial settings of the map when the page is loaded
               defaultZoom={15}
               defaultCenter={ {lat:41.881832, lng:-87.623177 } }
-            
+
               //logs changes made to map view + zoom
-              onCameraChanged={(ev) => 
-              console.log('camera changed:', ev.detail.center, 'zoom', ev.detail.zoom) 
+              onCameraChanged={(ev) =>
+              console.log('camera changed:', ev.detail.center, 'zoom', ev.detail.zoom)
               }
             />
             </div>
