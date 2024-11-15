@@ -49,6 +49,7 @@ export const NavBar = () => {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/maps">Maps</Link></li>
                 <li><Link to="/table">Table</Link></li>
+                <li><Link to="/events">Events</Link></li>
                 <li>
                     <Button onClick={toggleDrawer(true)} className="nav-btn" variant="contained" color='warning'>Contact</Button>
                     <Drawer open={open} onClose={toggleDrawer(false)}>
@@ -56,7 +57,6 @@ export const NavBar = () => {
                     </Drawer>
                 </li>
                 </div>
-
             </ul>
     )
 }

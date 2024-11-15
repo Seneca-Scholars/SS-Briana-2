@@ -8,6 +8,8 @@ import { PhineasContact } from './Pages/Phineas';
 import { FerbContact } from './Pages/Ferb';
 import { DoofenshmirtzContact } from './Pages/Doofenshmirtz';
 import { MonogramContact } from './Pages/MajorMonogram';
+import { Footer } from './Pages/Footer';
+import { Events } from './Pages/Events';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Background from './background.jpg'
 
@@ -33,7 +35,9 @@ function App() {
         <Route path="/Ferb" element={ <FerbContact />}/>
         <Route path="/Doofenshmirtz" element={ <DoofenshmirtzContact />}/>
         <Route path="/MajorMonogram" element={ <MonogramContact />}/>
+        <Route path="/Events" element={ <Events />}/>
       </Routes>
+      <Footer />
     </>
     </div>
     </Router>

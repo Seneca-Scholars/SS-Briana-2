@@ -39,7 +39,7 @@ export const MonogramContact = () => {
                             value={time}
                             label="Time"
                             onChange={handleChange}
-                            sx={{ color: 'white', fontSize: '20px', width: '200px', borderColor: 'white'}}
+                            sx={{ color: 'white', fontSize: '20px', width: '200px'}}
                             >
                             <MenuItem value={10}>9:00 am</MenuItem>
                             <MenuItem value={20}>10:00 am</MenuItem>

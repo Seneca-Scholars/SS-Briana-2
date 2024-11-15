@@ -234,7 +234,6 @@ h3 {
       display:flex;
       flex-direction: column;
       justify-content: center;
-      justify-content: center;
       margin: 50px 0px 50px;
       border-radius: 0px 20px 20px 0px;
       padding: 50px;
@@ -251,6 +250,7 @@ h3 {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-bottom: 300px;
 
   .contact-form {
     background-color: #2F231E;
@@ -258,6 +258,16 @@ h3 {
     width: 80%;
     border-radius: 10px;
     padding: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .form-topic, .current-location, .time-needed {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 30%;
+    }
 
     .form-topic, .current-location {
       input {
@@ -265,10 +275,15 @@ h3 {
         height: 50px;
         border-radius: 5px;
         font-size: 20px;
+        padding: 15px;
       }
     }
 
     .form-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       input {
         width: 600px;
         height: 150px;
@@ -276,5 +291,58 @@ h3 {
         font-size: 20px;
       }
     }
+
   }
 }
+
+.footer {
+  display: grid;
+  grid-template-columns: 90% 10%;
+  padding: 20px;
+  background-color: #24a7a1;
+  font-size: 14px;
+
+  a {
+    text-decoration: none;
+    color: inherit
+  }
+
+  a:hover {
+    text-decoration:underline;
+  }
+
+  .directory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0px 600px 0px 80px;
+
+    h4, p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-top: 0;
+    }
+  }
+
+  .footer-site-info {
+    margin-right: 80px;
+  }
+
+}
+
+.events-page {
+
+  .calendar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .event-selected {
+    background-color: #ff9810;
+  }
+}
+
