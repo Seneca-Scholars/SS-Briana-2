@@ -7,13 +7,15 @@ import { SecretLair } from './Pages/SecretLair';
 import { PhineasContact } from './Pages/Phineas';
 import { FerbContact } from './Pages/Ferb';
 import { DoofenshmirtzContact } from './Pages/Doofenshmirtz';
-import { MonogramContact } from './Pages/MajorMonogram';
+import { MonogramContact } from './Pages/Monogram';
 import { Footer } from './Pages/Footer';
 import { Events } from './Pages/Events';
+import { IndividualOrg } from './Pages/IndividualOrg';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Background from './background.jpg'
 
 function App() {
+
   const backImg = {
     backgroundImage: `url(${Background})`,
     backgroundSize: 'cover',
@@ -34,8 +36,9 @@ function App() {
         <Route path="/Phineas" element={ <PhineasContact />}/>
         <Route path="/Ferb" element={ <FerbContact />}/>
         <Route path="/Doofenshmirtz" element={ <DoofenshmirtzContact />}/>
-        <Route path="/MajorMonogram" element={ <MonogramContact />}/>
+        <Route path="/Monogram" element={ <MonogramContact />}/>
         <Route path="/Events" element={ <Events />}/>
+        <Route path="/IndividualOrg" element={ <IndividualOrg />}/>
       </Routes>
       <Footer />
     </>

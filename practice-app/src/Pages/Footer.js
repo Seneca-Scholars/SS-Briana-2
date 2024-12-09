@@ -27,6 +27,13 @@ export const Footer = () => {
                     <p>Link 3</p>
                 </div>
 
+                <div className='footer-events'>
+                    <Link to="/events"><h4>Events</h4></Link>
+                    <p>Link 1</p>
+                    <p>Link 2</p>
+                    <p>Link 3</p>
+                </div>
+
                 <div className='footer-contact-pages'>
                     <h4>Contact Pages</h4>
                     <Link to="/Phineas"><p>Phineas</p></Link>
